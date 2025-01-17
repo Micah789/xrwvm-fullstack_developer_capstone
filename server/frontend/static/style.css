@@ -124,3 +124,13 @@ img{
     text-align:center;
     box-shadow: 2px 2px 3px #999;  
 }
+
+.contact-card {
+    border-radius: 40px;
+}
+
+@media screen and (min-width: 768px) {
+    .contact-card-body .col:first-child {
+        border-right: 1px solid black;
+    }
+}
