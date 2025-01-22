@@ -69,7 +69,7 @@ def registration(request):
     Decorators:
     csrf_exempt
     '''
-    context = {}
+    # context = {}
     data = json.loads(request.body)
     username = data['userName']
     password = data['password']
@@ -77,7 +77,7 @@ def registration(request):
     last_name = data['lastName']
     email = data['email']
     username_exist = False
-    email_exist = False
+    # email_exist = False
 
     try:
         User.objects.get(username=username)
@@ -125,7 +125,8 @@ def get_cars(request):
 def get_dealerships(request, state="All"):
     '''
     Update the `get_dealerships` view to render the index page with
-    Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
+    Update the `get_dealerships` render list of dealerships
+    all by default, particular state if state is passed
 
     Args:
         request: request object
@@ -144,7 +145,8 @@ def get_dealerships(request, state="All"):
 
 def get_dealer_reviews(request, dealer_id):  # noqa: E501
     '''
-    Create a `get_dealer_reviews` view to render the reviews of a dealer with a dealer id
+    Create a `get_dealer_reviews` view to render
+    the reviews of a dealer with a dealer id
     '''
     # if dealer id has been provided
     if dealer_id:
@@ -167,8 +169,8 @@ def get_dealer_details(request, dealer_id):  # noqa: E501
         endpoint = "/fetchDealer/"+str(dealer_id)
         dealership = get_request(endpoint)
         return JsonResponse({"status": 200, "dealer": dealership})
-    else:
-        return JsonResponse({"status": 400, "message": "Bad Request"})
+
+    return JsonResponse({"status": 400, "message": "Bad Request"})
 
 
 #
@@ -181,8 +183,14 @@ def add_review(request):
         data = json.loads(request.body)
         try:
             response = post_review(data)
-            return JsonResponse({"status": 200, "message": f"Review Added - {response}"})
+            return JsonResponse({
+                "status": 200,
+                "message": f"Review Added - {response}"
+            })
         except Exception as e:
-            return JsonResponse({"status": 401, "message": f"Error in posting review {e}"})
+            return JsonResponse({
+                "status": 401,
+                "message": f"Error in posting review {e}"
+            })
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
