@@ -1,0 +1,10 @@
+// use spaces with 4 size for python files
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintArgs": [
+        "--max-line-length=120"
+    ],
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
+}
